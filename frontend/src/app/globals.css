@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+/* ===== JayScores design tokens ===== */
+:root {
+  --bg: #05070f;
+  --bg-2: #0a0e1c;
+  --panel: rgba(255, 255, 255, 0.045);
+  --panel-border: rgba(255, 255, 255, 0.09);
+  --text: #eef2ff;
+  --text-dim: #8b93ad;
+  --cyan: #00e5ff;
+  --lime: #a3e635;
+  --magenta: #ff2ec4;
+  --amber: #fbbf24;
+  --red: #ff4d5e;
+  --win: #00e5ff;
+  --draw: #8b93ad;
+  --loss: #ff2ec4;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg2: var(--bg-2);
+  --color-panel: var(--panel);
+  --color-ink: var(--text);
+  --color-dim: var(--text-dim);
+  --color-cyan: var(--cyan);
+  --color-lime: var(--lime);
+  --color-magenta: var(--magenta);
+  --color-amber: var(--amber);
+  --color-danger: var(--red);
+  --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(0, 229, 255, 0.08), transparent 60%),
+    radial-gradient(900px 500px at 10% 110%, rgba(255, 46, 196, 0.06), transparent 60%),
+    radial-gradient(1400px 900px at 50% 40%, rgba(20, 30, 60, 0.35), transparent 70%),
+    var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, sans-serif;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Fine dot grid over the whole app — subtle broadcast-graphics texture */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.25));
+  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.25));
+}
+
+/* Glass card */
+.glass {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 1rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 10px 30px -18px rgba(0, 0, 0, 0.8);
+}
+
+.glass-hover {
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.25s, box-shadow 0.25s;
+}
+.glass-hover:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 229, 255, 0.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 16px 48px -12px rgba(0, 229, 255, 0.3);
+}
+
+/* Section heading with accent tick */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.section-title::before {
+  content: "";
+  width: 4px;
+  height: 1.4rem;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--cyan), var(--magenta));
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.5);
+}
+
+.display {
+  font-family: "Bebas Neue", "Arial Narrow", sans-serif;
+  letter-spacing: 0.04em;
+}
+
+.text-glow-cyan { text-shadow: 0 0 18px rgba(0, 229, 255, 0.55); }
+.text-glow-magenta { text-shadow: 0 0 18px rgba(255, 46, 196, 0.55); }
+
+/* Live pulse dot */
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 77, 94, 0.6); }
+  50% { box-shadow: 0 0 0 7px rgba(255, 77, 94, 0); }
+}
+.live-dot {
+  width: 8px; height: 8px; border-radius: 9999px;
+  background: var(--red);
+  animation: pulse-dot 1.6s infinite;
+}
+
+/* Probability bar shimmer */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.bar-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 3.2s linear infinite;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,229,255,0.35); }
+
+::selection { background: rgba(0, 229, 255, 0.3); }
